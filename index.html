@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مصحف الشهباء</title>
+<meta name="description" content="مصحف الشهباء — مصحف المدينة النبوية بخط مجمع الملك فهد، من شعبة الشؤون العلمية في حلب">
+<meta name="theme-color" content="#054239">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="مصحف الشهباء">
+<link rel="stylesheet" href="css/app.css">
+<script>
+  // apply the saved theme before first paint
+  try { var t = localStorage.getItem('shahba.theme'); if (t) document.documentElement.dataset.theme = t;
+        var pp = localStorage.getItem('shahba.paper'); if (pp && pp !== 'cream') document.documentElement.dataset.paper = pp; } catch (e) {}
+</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></symbol>
+  <symbol id="i-pages" viewBox="0 0 24 24"><path d="M12 5c-2-1.5-5-2-8-1.5v15c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5v-15c-3-.5-6 0-8 1.5zM12 5v15"/></symbol>
+  <symbol id="i-scroll" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="8" rx="1"/><rect x="6" y="13.5" width="12" height="8" rx="1"/></symbol>
+  <symbol id="i-read" viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M8 18h12"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h2"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></symbol>
+  <symbol id="i-install" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 7v7M9 11l3 3 3-3"/></symbol>
+</svg>
+
+<header class="topbar">
+  <a class="brand" href="./" aria-label="مصحف الشهباء">
+    <span class="eagle" aria-hidden="true"></span>
+    <span class="brand-text"><b>مصحف الشهباء</b><small>شعبة الشؤون العلمية بحلب</small></span>
+  </a>
+  <nav class="tools">
+    <button class="ib" id="btnSearch" aria-label="البحث"><svg><use href="#i-search"/></svg></button>
+    <button class="ib" id="btnMarkPage" aria-label="علامة على هذه الصفحة"><svg><use href="#i-bookmark"/></svg></button>
+    <button class="ib" id="btnTheme" aria-label="الوضع الليلي"><svg><use href="#i-moon"/></svg></button>
+    <button class="ib" id="btnMenu" aria-label="القائمة"><svg><use href="#i-menu"/></svg></button>
+  </nav>
+</header>
+
+<div class="strip" id="strip">
+  <span id="stripSurah">…</span>
+  <span id="stripPage"></span>
+</div>
+
+<main id="main">
+  <section id="vPage" class="view pager" aria-label="تقليب الصفحات"></section>
+  <section id="vScroll" class="view scroller" aria-label="تمرير متصل" hidden></section>
+  <section id="vRead" class="view reader" aria-label="القراءة الحرة" hidden>
+    <div class="rbar">
+      <button class="ib sm" id="rPrev" aria-label="السورة السابقة"><svg><use href="#i-prev"/></svg></button>
+      <button class="rsel" id="rTitle">…</button>
+      <button class="ib sm" id="rNext" aria-label="السورة التالية"><svg><use href="#i-next"/></svg></button>
+      <span class="sp"></span>
+      <button class="ib sm" id="zOut" aria-label="تصغير"><svg><use href="#i-minus"/></svg></button>
+      <span class="zv" id="zVal">١٠٠٪</span>
+      <button class="ib sm" id="zIn" aria-label="تكبير"><svg><use href="#i-plus"/></svg></button>
+    </div>
+    <div class="rbody" id="rBody"></div>
+  </section>
+</main>
+
+<nav class="bottombar" id="modes">
+  <button data-act="index"><svg><use href="#i-list"/></svg><span>الفهرس</span></button>
+  <button data-mode="page"><svg><use href="#i-pages"/></svg><span>تقليب</span></button>
+  <button data-mode="scroll"><svg><use href="#i-scroll"/></svg><span>تمرير</span></button>
+  <button data-mode="read"><svg><use href="#i-read"/></svg><span>قراءة</span></button>
+</nav>
+
+<!-- Index -->
+<div class="panel" id="pIndex" hidden>
+  <div class="phead">
+    <div class="tabs" role="tablist">
+      <button class="on" data-tab="tSurah">السور</button>
+      <button data-tab="tPage">الصفحات</button>
+      <button data-tab="tMarks">العلامات</button>
+    </div>
+    <button class="ib close" aria-label="إغلاق"><svg><use href="#i-x"/></svg></button>
+  </div>
+  <div class="pbody">
+    <div class="tab" id="tSurah">
+      <input class="field" id="sFilter" type="search" placeholder="اكتب اسم السورة أو رقمها" autocomplete="off">
+      <div class="cont" id="contRow" hidden></div>
+      <ol class="slist" id="sList"></ol>
+    </div>
+    <div class="tab" id="tPage" hidden>
+      <label class="kick">انتقل إلى صفحة</label>
+      <div class="row"><input class="field" id="pNum" type="number" min="1" max="604" inputmode="numeric" placeholder="من ١ إلى ٦٠٤"><button class="btn" id="pGo">انتقل</button></div>
+      <p class="note">فهرس الأجزاء والأحزاب يُضاف قريبًا بإذن الله، حين تصل بياناته الموثقة.</p>
+    </div>
+    <div class="tab" id="tMarks" hidden><ul class="mlist" id="mList"></ul></div>
+  </div>
+</div>
+
+<!-- Search -->
+<div class="panel" id="pSearch" hidden>
+  <div class="phead">
+    <input class="field big" id="qIn" type="search" placeholder="ابحث بكلمة أو جزء من آية" autocomplete="off">
+    <button class="ib close" aria-label="إغلاق"><svg><use href="#i-x"/></svg></button>
+  </div>
+  <div class="pbody"><p class="note" id="qInfo">اكتب كلمتين أو أكثر. ويمكنك كتابة رقم السورة والآية هكذا: ٢:٢٥٥</p><ol class="rlist" id="qList"></ol></div>
+</div>
+
+<!-- Menu -->
+<div class="panel" id="pMenu" hidden>
+  <div class="phead"><b class="ptitle">مصحف الشهباء</b><button class="ib close" aria-label="إغلاق"><svg><use href="#i-x"/></svg></button></div>
+  <div class="pbody">
+    <div class="mrow"><span><b>لون الصفحة</b><small>في الوضع النهاري</small></span>
+      <div class="seg" id="paperOpts"><button data-paper="cream"><i style="background:#FBF9F2"></i>كريمي</button><button data-paper="white"><i style="background:#FFFFFF"></i>أبيض</button></div></div>
+    <button class="mitem" id="mOffline"><svg><use href="#i-down"/></svg><span><b>تنزيل المصحف كاملًا</b><small id="offInfo">ليعمل دون إنترنت (نحو ١٠٠ ميغا)</small></span></button>
+    <div class="prog" id="offProg" hidden><i></i></div>
+    <button class="mitem" id="mInstall"><svg><use href="#i-install"/></svg><span><b>تثبيت المصحف على الجوال</b><small>يظهر بين تطبيقاتك ويفتح دون متصفح</small></span></button>
+    <button class="mitem" id="mAbout"><svg><use href="#i-info"/></svg><span><b>عن المصحف ومصادره</b><small>المصادر والتراخيص</small></span></button>
+    <div class="about" id="aboutBox" hidden>
+      <h3>مصادر هذا المصحف</h3>
+      <p>لم يُكتب في هذا الموقع حرف واحد من القرآن الكريم باليد؛ كل ما فيه مأخوذ كما هو من مصادره الموثقة:</p>
+      <ul>
+        <li><b>رسم المصحف وخطوط صفحاته الـ٦٠٤</b> (QPC V2 — طبعة ١٤٢١هـ): مجمع الملك فهد لطباعة المصحف الشريف.</li>
+        <li><b>ترتيب الأسطر والصفحات</b> (KFGQPC V2 15 lines) و<b>النص العثماني كلمةً كلمة</b> (KFGQPC Hafs) و<b>خط إطار اسم السورة</b>: من إنتاج المجمع، نُزّلت من منصة <a href="https://qul.tarteel.ai" target="_blank" rel="noopener">QUL</a> التابعة لـ Tarteel.</li>
+        <li>الخطوط محفوظة الحقوق لمجمع الملك فهد، وتُعرض كما هي دون أي تعديل على ملفاتها.</li>
+        <li>خط الواجهة: قمرة (itf Qomra Arabic).</li>
+      </ul>
+      <p class="note">أسماء السور في الفهرس مؤقتة إلى أن تصل بيانات السور الرسمية.</p>
+    </div>
+    <footer class="foot">شعبة الشؤون العلمية في حلب — الإصدار <span id="ver"></span></footer>
+  </div>
+</div>
+
+<!-- Ayah actions -->
+<div class="sheetbar" id="aBar" hidden>
+  <div class="ahead"><b id="aTitle"></b><button class="ib close" id="aClose" aria-label="إغلاق"><svg><use href="#i-x"/></svg></button></div>
+  <div class="abtns">
+    <button id="aCopyU"><svg><use href="#i-copy"/></svg><span>نسخ بالرسم العثماني</span></button>
+    <button id="aCopyI" disabled title="قريبًا"><svg><use href="#i-copy"/></svg><span>نسخ بالإملائي <small>قريبًا</small></span></button>
+    <button id="aMark"><svg><use href="#i-bookmark"/></svg><span>علامة</span></button>
+    <button id="aShare"><svg><use href="#i-share"/></svg><span>مشاركة</span></button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="scrim" id="scrim" hidden></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

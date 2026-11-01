@@ -1,0 +1,18 @@
+{
+  "name": "مصحف الشهباء",
+  "short_name": "مصحف الشهباء",
+  "description": "مصحف المدينة النبوية بخط مجمع الملك فهد — شعبة الشؤون العلمية في حلب",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FBF9F2",
+  "theme_color": "#054239",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
