@@ -91,7 +91,7 @@ main { position: fixed; top: calc(var(--top) + 30px + env(safe-area-inset-top));
 :root[data-theme="dark"] .hdr { font-palette: --hdrDark; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hdr { font-palette: --hdrDark; } }
 .sheet:not(.ready) .ln:not(.hd) { color: transparent; }
-.sheet.err .lines::before { content: "تعذّر تحميل خط هذه الصفحة. تحقق من الاتصال ثم أعد المحاولة."; color: var(--maroon); font-size: 1.1em; text-align: center; margin: auto; }
+.sheet.err .lines::before { content: "تعذّر تحميل خط هذه الصفحة. تحقق من الاتصال، ثم اضغط هنا لإعادة المحاولة."; cursor: pointer; color: var(--maroon); font-size: 1.1em; text-align: center; margin: auto; }
 .w { border-radius: .12em; cursor: pointer; }
 .w.hl { background: var(--hl); }
 .w.flash { animation: flash 1.6s ease-out; }

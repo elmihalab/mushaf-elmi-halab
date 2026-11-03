@@ -1,7 +1,7 @@
 /* مصحف الشهباء — شعبة الشؤون العلمية في حلب
    كل نصوص القرآن ورسمها تُقرأ من ملفات data/ و fonts/ المأخوذة كما هي من مجمع الملك فهد عبر QUL. */
 'use strict';
-const VERSION = '0.2.0';
+const VERSION = '0.2.1';
 const RATIO = 1.5526;                       // page height / width
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -42,9 +42,20 @@ const findAyah = (s, a) => (s >= 1 && s <= 114 && a >= 1 && a <= D.surahs[s - 1]
 /* ---------- page fonts: 10 fonts per pack, each font's bytes untouched ---------- */
 const fam = p => 'qcf' + p;
 const packs = new Map(), fonts = new Map();
+const PCACHE = 'shahba-pages-v1';
+// a pack must arrive whole; a bad copy kept by the browser (e.g. an old "not found") is thrown away and fetched fresh
+async function fetchPack(k) {
+  const pk = D.packs.packs[k], url = new URL('fonts/pages/' + pk.file, location.href).href;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const r = await fetch(url, attempt ? { cache: 'reload' } : undefined).catch(() => null);
+    if (r && r.ok) { const b = await r.arrayBuffer().catch(() => null); if (b && b.byteLength === pk.size) return b; }
+    if ('caches' in window) await caches.open(PCACHE).then(c => c.delete(url)).catch(() => {});
+  }
+  throw new Error('pack');
+}
 function getPack(k) {
   if (!packs.has(k)) {
-    const pr = fetch('fonts/pages/' + D.packs.packs[k].file).then(r => { if (!r.ok) throw new Error('pack'); return r.arrayBuffer(); });
+    const pr = fetchPack(k);
     packs.set(k, pr); pr.catch(() => packs.delete(k));
     if (packs.size > 4) packs.delete(packs.keys().next().value);
   }
@@ -100,7 +111,7 @@ function mountSheet(slot, p, w) {
   slot.replaceChildren(sh);
   const need = [loadFont(p)]; if (D.pages[p - 1].some(l => l[0] === 2)) need.push(loadFont(1));
   Promise.all(need).then(() => requestAnimationFrame(() => { fitSheet(sh); sh.classList.add('ready'); markSelection(sh); }))
-    .catch(() => { sh.classList.add('err'); slot._p = 0; });
+    .catch(() => { sh.classList.add('err'); slot._p = 0; sh.onclick = () => mountSheet(slot, p, w); });
 }
 function unmount(slot) { if (slot._p) { slot.replaceChildren(); slot._p = 0; } }
 function fitSheet(sh) {               // shrink the whole page a little if any full line would overflow
@@ -459,7 +470,6 @@ $('#btnTheme').onclick = () => {
 /* menu: offline, install, about */
 $('#btnMenu').onclick = async () => { openPanel('pMenu'); offlineInfo(); };
 $('#mAbout').onclick = () => { $('#aboutBox').hidden = !$('#aboutBox').hidden; };
-const PCACHE = 'shahba-pages-v1';
 async function offlineInfo() {
   if (!('caches' in window)) return;
   const c = await caches.open(PCACHE), keys = (await c.keys()).filter(r => r.url.endsWith('.bin')), n = D.packs.packs.length;

@@ -1,5 +1,5 @@
 /* مصحف الشهباء — يحفظ الموقع في الجهاز ليعمل دون إنترنت */
-const SHELL_V = 'shahba-shell-0.2.0';
+const SHELL_V = 'shahba-shell-0.2.1';
 const PAGES = 'shahba-pages-v1';          // font packs never change: kept across versions
 const SHELL = ['./', 'index.html', 'css/app.css', 'js/app.js', 'manifest.webmanifest', 'favicon.ico',
   'icons/eagle.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png', 'icons/favicon-32.png',
@@ -17,7 +17,9 @@ self.addEventListener('fetch', e => {
   if (url.pathname.includes('/fonts/pages/') || url.pathname.endsWith('/data/words.json')) {
     e.respondWith(caches.open(PAGES).then(async c => {
       const hit = await c.match(req); if (hit) return hit;
-      const res = await fetch(req); if (res.ok) c.put(req, res.clone()); return res;
+      let res = await fetch(req).catch(() => null);
+      if (!res || !res.ok) res = await fetch(req.url, { cache: 'reload' });   // never trust a stored "not found"
+      if (res.ok) c.put(req, res.clone()); return res;
     }));
     return;
   }
